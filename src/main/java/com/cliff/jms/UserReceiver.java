@@ -41,7 +41,8 @@ public class UserReceiver implements MessageListener {
             User receivedUser = (User) messageConverter.fromMessage(message);
             logger.info(" >> Received user: " + receivedUser);
             //send a confirmation message
-            confirmationSender.sendMessage(new Confirmation(id.incrementAndGet(), "User " + receivedUser.getLastName() + " received."));
+            confirmationSender.sendMessage(new Confirmation(id.incrementAndGet(), "User " +
+                    receivedUser.getLastName() + " received."));
         } catch (JMSException e) {
             logger.error("something went wrong ", e);
         }
