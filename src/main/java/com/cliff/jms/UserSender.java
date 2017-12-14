@@ -6,6 +6,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.jms.Destination;
+import javax.jms.Queue;
 import javax.jms.Session;
 
 /**
@@ -17,10 +18,10 @@ public class UserSender {
 
     private JmsTemplate jmsTemplate;
 
-    private Destination userQueue;
+    private Queue userQueue;
 
     @Autowired
-    public UserSender( JmsTemplate jmsTemplate, Destination userQueue ) {
+    public UserSender( JmsTemplate jmsTemplate, Queue userQueue ) {
         this.jmsTemplate = jmsTemplate;
         this.userQueue = userQueue;
     }

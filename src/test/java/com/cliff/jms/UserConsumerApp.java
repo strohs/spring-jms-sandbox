@@ -1,7 +1,6 @@
 package com.cliff.jms;
 
 import com.cliff.jms.config.JmsCommonConfig;
-import com.cliff.jms.config.JmsConsumerConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -21,9 +20,12 @@ public class UserConsumerApp {
 
     public static void main( String[] args ) throws IOException {
         AbstractApplicationContext ctx = new AnnotationConfigApplicationContext(
-                JmsCommonConfig.class,
-                JmsConsumerConfig.class );
+                JmsCommonConfig.class );
         ctx.registerShutdownHook();
+
+//        for ( String name : ctx.getBeanDefinitionNames() ) {
+//            logger.info( name );
+//        }
 
         //get the UserReceiver from the context
         UserReceiver userReceiver = ctx.getBean( UserReceiver.class );

@@ -5,6 +5,9 @@ import org.apache.activemq.command.ActiveMQQueue;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jms.annotation.EnableJms;
+import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
+import org.springframework.jms.config.JmsListenerContainerFactory;
 import org.springframework.jms.connection.CachingConnectionFactory;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.support.converter.MessageConverter;
@@ -12,6 +15,7 @@ import org.springframework.jms.support.converter.SimpleMessageConverter;
 
 import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
+import javax.jms.Queue;
 import java.util.Arrays;
 
 /**
@@ -20,6 +24,7 @@ import java.util.Arrays;
  */
 @Configuration
 @ComponentScan( basePackages = {"com.cliff.jms"})
+@EnableJms
 public class JmsCommonConfig {
 
     private final String [] trustedPackages = {"com.cliff.jms.domain"};
@@ -42,6 +47,15 @@ public class JmsCommonConfig {
     }
 
     @Bean
+    public DefaultJmsListenerContainerFactory jmsListenerContainerFactory( ConnectionFactory connectionFactory ) {
+        DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
+        factory.setMessageConverter( converter() );
+        factory.setConcurrency( "1-1" );
+        factory.setConnectionFactory( connectionFactory );
+        return factory;
+    }
+
+    @Bean
     public JmsTemplate jmsTemplate(){
         JmsTemplate jmsTemplate = new JmsTemplate();
         jmsTemplate.setConnectionFactory( connectionFactory() );
@@ -51,12 +65,12 @@ public class JmsCommonConfig {
 
     //create the 'user' queue
     @Bean
-    public Destination userQueue() {
+    public Queue userQueue() {
         return new ActiveMQQueue( "com.queue.user" );
     }
 
     @Bean
-    public Destination confirmationQueue() {
+    public Queue confirmationQueue() {
         return new ActiveMQQueue( "com.queue.confirmation" );
     }
 

@@ -1,7 +1,6 @@
 package com.cliff.jms;
 
 import com.cliff.jms.config.JmsCommonConfig;
-import com.cliff.jms.config.JmsProducerConfig;
 import com.cliff.jms.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +25,7 @@ public class UserProducerApp {
     public static void main( String[] args ) throws IOException {
 
         AbstractApplicationContext ctx = new AnnotationConfigApplicationContext(
-                JmsCommonConfig.class, JmsProducerConfig.class
+                JmsCommonConfig.class
         );
 
 
