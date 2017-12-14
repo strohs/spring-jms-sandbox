@@ -11,6 +11,7 @@ import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.jms.support.converter.SimpleMessageConverter;
 
 import javax.jms.ConnectionFactory;
+import javax.jms.Destination;
 import java.util.Arrays;
 
 /**
@@ -50,12 +51,12 @@ public class JmsCommonConfig {
 
     //create the 'user' queue
     @Bean
-    public ActiveMQQueue userQueue() {
+    public Destination userQueue() {
         return new ActiveMQQueue( "com.queue.user" );
     }
 
     @Bean
-    public ActiveMQQueue confirmationQueue() {
+    public Destination confirmationQueue() {
         return new ActiveMQQueue( "com.queue.confirmation" );
     }
 
