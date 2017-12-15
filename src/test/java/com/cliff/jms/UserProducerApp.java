@@ -2,6 +2,7 @@ package com.cliff.jms;
 
 import com.cliff.jms.config.JmsCommonConfig;
 import com.cliff.jms.config.JmsProducerConfig;
+import com.cliff.jms.domain.PhoneUser;
 import com.cliff.jms.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,10 +30,14 @@ public class UserProducerApp {
                 JmsCommonConfig.class, JmsProducerConfig.class
         );
 
-
+        for( String name: ctx.getBeanDefinitionNames() ) {
+            logger.info(" Bean name: " + name);
+        }
 
         UserService userService = ctx.getBean( UserService.class );
         UserSender userSender = ctx.getBean( UserSender.class );
+        User user1 = ctx.getBean("user", User.class );
+        
         assertNotNull( userService );
         assertNotNull( userSender );
 

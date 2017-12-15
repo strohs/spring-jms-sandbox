@@ -3,10 +3,10 @@ package com.cliff.jms.domain;
 import java.io.Serializable;
 
 /**
- * User domain object that will be converted into a message and placed onto queues
+ * Another type of user that's not currently being used
  * User: Cliff
  */
-public class User implements Serializable {
+public class PhoneUser implements Serializable {
 
     private String firstName;
 
@@ -14,13 +14,16 @@ public class User implements Serializable {
 
     private int age;
 
-    public User() {
+    private String phoneNumber;
+
+    public PhoneUser() {
     }
 
-    public User( String firstName, String lastName, Integer age ) {
+    public PhoneUser( String firstName, String lastName, int age, String phoneNumber ) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
+        this.phoneNumber = phoneNumber;
     }
 
     public String getFirstName() {
@@ -47,14 +50,22 @@ public class User implements Serializable {
         this.age = age;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber( String phoneNumber ) {
+        this.phoneNumber = phoneNumber;
+    }
+
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder( "User{" );
+        final StringBuilder sb = new StringBuilder( "PhoneUser{" );
         sb.append( "firstName='" ).append( firstName ).append( '\'' );
         sb.append( ", lastName='" ).append( lastName ).append( '\'' );
         sb.append( ", age=" ).append( age );
+        sb.append( ", phoneNumber='" ).append( phoneNumber ).append( '\'' );
         sb.append( '}' );
         return sb.toString();
     }
-
 }
